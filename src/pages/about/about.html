@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      جدید
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  اگر عضو نیستید روی این دکمه کلیک کنید
+  <button ion-button block clear (click)="signup('signup')" color="dark" class="login-button">
+    <ion-icon name="logo-eeta"></ion-icon> عضویت از طریق سایت
+  </button>
+  اگر قبلا عضو بودید به منظور ورود در سیستم روی این دکمه کلیک کنید
+  <button ion-button block clear (click)="signup('login')" color="dark" class="login-button">
+    <ion-icon name="logo-eeta"></ion-icon> ورود به سایت
+  </button>
+  <h2>برای پست جدید روی دکمه ی زیر کلیک کنید</h2>
+  <p>
+    برای این کار شما فقط به یک عکس احتیاج دارید
+  </p>
+  <button ion-button block clear (click)="signup('add')" color="dark" class="login-button">
+    <ion-icon name="logo-eeta"></ion-icon> اضافه کردن پست
+  </button>
+  <h2>برای ویرایش پست های قبلی روی دکمه ی زیر کلیک کنید</h2>
+  <button ion-button block clear (click)="signup('all')" color="dark" class="login-button">
+    <ion-icon name="logo-eeta"></ion-icon> نمایش پست های شما
+  </button>
+    
+</ion-content>
+
+

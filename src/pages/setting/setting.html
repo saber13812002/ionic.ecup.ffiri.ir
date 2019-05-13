@@ -1,0 +1,20 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+        تنظیمات
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>{{ 'SELECT_LANGUAGE' | translate }}</ion-label>
+    <ion-select [(ngModel)]="languageSelected" (ionChange)='setLanguage()' [cancelText]="'CANCEL' | translate">
+      <ion-option *ngFor="let item of languages" [value]="item.code">{{item.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-content>
