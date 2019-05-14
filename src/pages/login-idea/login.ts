@@ -9,8 +9,7 @@ import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser';
 import { ENV } from '../../env';
 import 'rxjs/add/operator/map';
 import { URLSearchParams } from '@angular/http';
-
-
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -38,7 +37,7 @@ export class LoginIdeaPage {
   JWT: string;
   tokenl: any;
 
-  step1flag:boolean=false;
+  step1flag: boolean = false;
 
   logintext = "ورود به عنوان مهمان";
 
@@ -94,7 +93,7 @@ export class LoginIdeaPage {
   }
 
   public textChanged() {
-
+    this.step1flag = true;
     this.logintext = "ورود";
   }
 
@@ -150,14 +149,15 @@ export class LoginIdeaPage {
     });
     browser.on('exit').subscribe(function (event) {
     });
-
   }
-
 
   signUpIdea() {
     this.navCtrl.setRoot(LoginIdeaPage);
   }
 
+  goToFirstPage() {
+    this.navCtrl.push(LoginPage)
+  }
 
   async signup2(): Promise<any> {
 
@@ -202,8 +202,6 @@ export class LoginIdeaPage {
           }
         );
       });
-
-
 
     }).catch((error) => {
       throw error;
@@ -259,11 +257,10 @@ export class LoginIdeaPage {
     if (this.patternMobile.test(this.mobile)) {
       this.step1flag = true;
     }
-    else
-    {
+    else {
       this.step1flag = false;
     }
   }
 
-  sendPin(){}
+  sendPin() { }
 }

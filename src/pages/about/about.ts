@@ -26,8 +26,6 @@ export class AboutPage {
     '?client_id=' + ENV.clientId + '&' +
       'redirect_uri=' + ENV.redirectUri + '&' +
       'response_type=id_token%20token&'
-      //'scope=' + encodeURI(ENV.scope) + '&' +
-      //'state=' + ENV.state + '&nonce=' + ENV.nonce;
       ;
 
     if (type == 'add')

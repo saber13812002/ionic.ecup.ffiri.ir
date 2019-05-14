@@ -11,15 +11,15 @@ import { TabsPage } from '../pages/tabs/tabs';
 @Component({
   templateUrl: 'app.html'
 })
-export class BerimMasjedApp {
+export class FifaApp {
   rootPage:any = LoginPage;
   textDir: string = "rtl";
 
   constructor(
-    platform: Platform, 
-    statusBar: StatusBar, 
-    splashScreen: SplashScreen, 
-    private translate: TranslateService, 
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    private translate: TranslateService,
     private config: Config
   ) {
     translate.setDefaultLang('fa');

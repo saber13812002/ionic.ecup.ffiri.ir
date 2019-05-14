@@ -22,14 +22,13 @@ import { URLSearchParams } from '@angular/http';
 })
 export class LoginPage {
 
-  patternUsername: RegExp = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
-  patternPin: RegExp = /^\d{4}$/;
+  patternMobile: RegExp = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
+
 
   languageSelected: any;
   languages: Array<LanguageModel>;
 
-  username: string;
-  password: string;
+  mobile: string;
 
   redirectUri: string = "http://localhost:8100/";
   loginUrl = "https://masjedcloob.ir/blog/jwt.php?client_id=&redirect_uri=&response_type=id_token-token&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzamVkY2xvb2IuaXJcL2Jsb2ciLCJpYXQiOjE1NDk0NjAyMjEsIm5iZiI6MTU0OTQ2MDIyMSwiZXhwIjoxNTUwMDY1MDIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.sbGawBdMFt7jAhn3RIYyxui_er0_XsJ67YRWBtaUUyw";
@@ -40,7 +39,9 @@ export class LoginPage {
   JWT: string;
   tokenl: any;
 
-  logintext = "ورود به عنوان مهمان";
+  step1flag:boolean=false;
+
+  logintext = "ارسال کد";
 
   constructor(public navCtrl: NavController,
     //private cookieService: CookieService,
@@ -78,15 +79,6 @@ export class LoginPage {
 
   }
 
-  async getToken() {
-    let token = await this.restProvider.postLogin(this.username, this.password).subscribe(data => {
-      console.log(data);
-      localStorage.setItem('wpIonicToken', JSON.stringify(data));
-      return data.token;
-    });
-
-    this.wpIonicToken = localStorage.getItem('wpIonicToken');
-  }
 
   async validateToken(jwt: string) {
     let tok = jwt ? jwt : this.wpIonicToken.token;
@@ -110,14 +102,10 @@ export class LoginPage {
       duration: 500
     });
 
-    await this.getToken();
-    // if (this.wpIonicToken)
-    //   await this.validateToken()
-
 
     loading.onDidDismiss(() => {
       if (this.wpIonicToken)
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot(LoginIdeaPage);
       else
         this.toastController.create({
           message: "...",
@@ -134,6 +122,14 @@ export class LoginPage {
     return "";
   }
 
+  public step1() {
+    if (this.patternMobile.test(this.mobile)) {
+      this.step1flag = true;
+    }
+    else {
+      this.step1flag = false;
+    }
+  }
 
   async signup(type: string) {
     let signupOrSignin = (type == 'signup' ? ENV.security.register : ENV.security.login);
@@ -164,7 +160,7 @@ export class LoginPage {
   }
 
 
-  signUpIdea(){
+  signUpIdea() {
     this.navCtrl.setRoot(LoginIdeaPage);
   }
 

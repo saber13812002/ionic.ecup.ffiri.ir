@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { BerimMasjedApp } from './app.component';
+import { FifaApp } from './app.component';
 import { Platform } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -14,17 +14,8 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { NbaPage } from '../pages/nba/nba';
-import { BookPage } from '../pages/book/book';
 import { HomePage } from '../pages/home/home';
-import { TvPage } from '../pages/tv/tv';
 import { TabsPage } from '../pages/tabs/tabs';
-import { PlayerDetailPage } from '../pages/player-detail/player-detail';
-import { PlaygroundDetailPage } from '../pages/playground-detail/playground-detail';
-import { VideoDetailPage } from '../pages/video-detail/video-detail';
-import { VideoPage } from '../pages/video/video';
-import { QavamiPage } from '../pages/qavami/qavami';
-import { MapPage } from '../pages/map/map';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageServiceProvider } from '../providers/language-service/language-service';
@@ -40,22 +31,13 @@ import { PostsProvider } from '../providers/wp-rest/posts'
 
 @NgModule({
   declarations: [
-    BerimMasjedApp,
+    FifaApp,
     AboutPage,
     LoginPage,
     LoginIdeaPage,
     ContactPage,
     HomePage,
-    TvPage,
     TabsPage,
-    NbaPage,
-    BookPage,
-    PlayerDetailPage,
-    PlaygroundDetailPage,
-    VideoDetailPage,
-    VideoPage,
-    QavamiPage,
-    MapPage,
     //HttpClientModule,
     //JsonpModule // if used
   ],
@@ -63,11 +45,8 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     HttpModule,
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(BerimMasjedApp, {}, {
+    IonicModule.forRoot(FifaApp, {}, {
       links: [
-        { segment: 'player', component: PlayerDetailPage, name: 'PlayerDetail' },
-        { segment: 'playground/:id', component: PlaygroundDetailPage, name: 'PlaygroundDetail' },
-        { segment: 'video/:id', component: VideoDetailPage, name: 'VideoDetail' },
 
       ]
     }),
@@ -81,22 +60,13 @@ import { PostsProvider } from '../providers/wp-rest/posts'
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    BerimMasjedApp,
+    FifaApp,
     AboutPage,
     LoginPage,
     LoginIdeaPage,
     ContactPage,
     HomePage,
-    TvPage,
     TabsPage,
-    NbaPage,
-    BookPage,
-    PlayerDetailPage,
-    PlaygroundDetailPage,
-    VideoDetailPage,
-    VideoPage,
-    QavamiPage,
-    MapPage,
     //HttpClientModule,
     //JsonpModule // if used
   ],

@@ -1,11 +1,9 @@
 export const ENV = {
   name: "Development",
   api: {
-    //baseUrl: 'http://localhost/Documents/bachehayemasjed/masjedcloob.ir/public_html/',
     baseUrl: 'https://masjedcloob.ir/',
   },
   wp_api: {
-    //baseUrl: 'http://localhost/Documents/bachehayemasjed/masjedcloob.ir/public_html/',
     baseUrl: 'https://masjedcloob.ir/blog',
     posts_url : '/wp-json/wp/v2/posts',
   },

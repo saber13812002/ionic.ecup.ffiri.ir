@@ -21,7 +21,7 @@ export class RestProvider {
 
   getTv(page, type?): Observable<any[]> {
     let q = (type == "mp4") ? "&type=mp4" : ((type == "qavami") ? "&type=qavami" : "");
-    
+
     let URL1 = 'https://berimbasket.ir/bball/bots/botTvRadioGet.php?format=json' + q + '&page=' + page + '&$number_of_posts=10';
 
     return this.http.get(URL1)
@@ -30,56 +30,9 @@ export class RestProvider {
       })
   }
 
-  getStories(page): Observable<any[]> {
-    let URL1 = this.apiUrl + this.apiFolder + '/getUsersStory.php?token=asdfadsfklajdhi849hjbsvdsv&page=' + page;
 
-    return this.http.get(URL1)
-      //.catch(this.handleError);
-      .catch((err) => {
-
-        // Do messaging and error handling here
-
-        return Observable.throw(err)
-      })
-  }
-
-  getUsers(page): Observable<any[]> {
-    let URL1 = this.apiUrl + this.apiFolder + '/getUsers.php?token=asdfadsfklajdhi849hjbsvdsv&page=' + page;
-
-    return this.http.get(URL1)
-      //.catch(this.handleError);
-      .catch((err) => {
-
-        // Do messaging and error handling here
-
-        return Observable.throw(err)
-      })
-  }
-
-  getPosts(page): Observable<any[]> {
-    let URL2 = this.apiUrl + this.apiFolder + '/getUsersPosts.php?token=asdfadsfklajdhi849hjbsvdsv&page=' + page;
-
-    return this.http.get(URL2)
-      //.catch(this.handleError);
-      .catch((err) => {
-
-        // Do messaging and error handling here
-
-        return Observable.throw(err)
-      })
-  }
-
-  getMatch(page): Observable<any[]> {
-    let URL3 = this.apiUrl + this.apiFolder + '/getScoresV2.php?user=12&format=json&from=' + page;
-
-    return this.http.get(URL3)
-      //.catch(this.handleError);
-      .catch((err) => {
-
-        // Do messaging and error handling here
-
-        return Observable.throw(err)
-      })
+  getRequireOtp(phone){
+    
   }
 
   postLogin(username, password) {
