@@ -61,7 +61,7 @@ export class HomePage {
     if (this.token )
       this.presentToast("شما لاگین هستید میتوانید کامنت بگذارید");
     else
-      this.presentToast("شما به عنوان مهمان وارد شدید و نمیتوانید کامنت بگذارید");
+      this.presentToast("پین اشتباه است");
 
   }
 

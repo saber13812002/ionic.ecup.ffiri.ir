@@ -1,14 +1,11 @@
 export const ENV = {
   name: "Development",
   api: {
-    baseUrl: 'https://masjedcloob.ir/',
+    baseUrl: 'http://localhost:8000',
   },
-  wp_api: {
-    baseUrl: 'https://masjedcloob.ir/blog',
-    posts_url : '/wp-json/wp/v2/posts',
-  },
-  wp_zeinabian_api: {
-    baseUrl: 'https://zeinabian.ir/',
+  otp_api: {
+    otp1_url : '/api/v1/otp1/',
+    otp2_url : '/api/v1/otp2/',
   },
     webapp: {
       baseUrl: "https://masjedcloob.ir",
@@ -33,4 +30,4 @@ export const ENV = {
   clientId:"",
   redirectUri:"",
   logError: true
-}; 
+};

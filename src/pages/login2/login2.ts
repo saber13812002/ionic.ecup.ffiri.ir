@@ -13,11 +13,11 @@ import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-login2',
+  templateUrl: 'login2.html',
   providers: [RestProvider]
 })
-export class LoginIdeaPage {
+export class Login2Page {
 
   patternMobile: RegExp = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/;
   patternPin5: RegExp = /^\d{5}$/;
@@ -59,6 +59,8 @@ export class LoginIdeaPage {
   async ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
 
+    this.mobile = this.navParams.get('mobile');
+
     this.wpIdeaToken = JSON.parse(localStorage.getItem('wpIdeaToken'));
     if (this.wpIdeaToken) {
       await this.validateToken(null);
@@ -97,26 +99,23 @@ export class LoginIdeaPage {
     this.logintext = "ورود";
   }
 
-  async login() {
+  public async login() {
     const loading = this.loadingCtrl.create({
       duration: 500
     });
 
     await this.getToken();
 
-    loading.onDidDismiss(() => {
-      if (this.wpIdeaToken)
-        this.navCtrl.setRoot(TabsPage);
-      else
-        this.toastController.create({
-          message: "...",
-          duration: 2000
-        })
-    });
-
     loading.present();
-    this.navCtrl.setRoot(TabsPage);
   }
+
+  async callOtp1() {
+    let token = await this.restProvider.postOtp1(this.mobile).subscribe(data => {
+      console.log(data);
+      return data;
+    });
+  }
+
 
   public async createAndSaveNonce(): Promise<string> {
 
@@ -152,11 +151,16 @@ export class LoginIdeaPage {
   }
 
   signUpIdea() {
-    this.navCtrl.setRoot(LoginIdeaPage);
+    this.navCtrl.setRoot(Login2Page);
   }
 
   goToFirstPage() {
     this.navCtrl.push(LoginPage)
+  }
+
+
+  gotoInfoPage() {
+  this.navCtrl.setRoot(TabsPage);
   }
 
   async signup2(): Promise<any> {

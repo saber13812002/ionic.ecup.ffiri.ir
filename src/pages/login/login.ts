@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, Toast, ToastController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-import { LoginIdeaPage } from '../login-idea/login';
+import { Login2Page } from '../login2/login2';
 
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageServiceProvider } from "../../providers/language-service/language-service";
@@ -34,12 +34,13 @@ export class LoginPage {
   loginUrl = "https://masjedcloob.ir/blog/jwt.php?client_id=&redirect_uri=&response_type=id_token-token&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzamVkY2xvb2IuaXJcL2Jsb2ciLCJpYXQiOjE1NDk0NjAyMjEsIm5iZiI6MTU0OTQ2MDIyMSwiZXhwIjoxNTUwMDY1MDIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.sbGawBdMFt7jAhn3RIYyxui_er0_XsJ67YRWBtaUUyw";
 
   wpIonicToken: any;
+  resultCallOtp1: any;
   token: any;
   jwt: string;
   JWT: string;
   tokenl: any;
 
-  step1flag:boolean=false;
+  step1flag: boolean = false;
 
   logintext = "ارسال کد";
 
@@ -99,22 +100,24 @@ export class LoginPage {
 
   async login() {
     const loading = this.loadingCtrl.create({
-      duration: 500
+      duration: 1000
     });
 
-
-    loading.onDidDismiss(() => {
-      if (this.wpIonicToken)
-        this.navCtrl.setRoot(LoginIdeaPage);
-      else
-        this.toastController.create({
-          message: "...",
-          duration: 2000
-        })
-    });
+    let data = await this.callOtp1();
 
     loading.present();
-    this.navCtrl.setRoot(TabsPage);
+  }
+
+  public gotoPinPage() {
+    this.navCtrl.setRoot(Login2Page, { mobile: this.mobile });
+  }
+
+  async callOtp1() {
+    let result = await this.restProvider.postOtp1(this.mobile).subscribe(data => {
+      console.log(data);
+      this.resultCallOtp1 = data;
+      return data;
+    });
   }
 
   public async createAndSaveNonce(): Promise<string> {
@@ -157,11 +160,6 @@ export class LoginPage {
     browser.on('exit').subscribe(function (event) {
     });
 
-  }
-
-
-  signUpIdea() {
-    this.navCtrl.setRoot(LoginIdeaPage);
   }
 
 

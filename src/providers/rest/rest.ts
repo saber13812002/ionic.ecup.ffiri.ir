@@ -19,41 +19,42 @@ export class RestProvider {
   apiUrl = ENV.api.baseUrl;
   apiFolder = 'api';
 
-  getTv(page, type?): Observable<any[]> {
-    let q = (type == "mp4") ? "&type=mp4" : ((type == "qavami") ? "&type=qavami" : "");
+  postOtp1(mobile): Observable<any[]> {
 
-    let URL1 = 'https://berimbasket.ir/bball/bots/botTvRadioGet.php?format=json' + q + '&page=' + page + '&$number_of_posts=10';
+    let uri = ENV.api.baseUrl + ENV.otp_api.otp1_url;
 
-    return this.http.get(URL1)
-      .catch((err) => {
-        return Observable.throw(err)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded' //updated
       })
-  }
-
-
-  getRequireOtp(phone){
-    
-  }
-
-  postLogin(username, password) {
-    let uri = ENV.security.serverUrl + ENV.security.jwtToken;
-
-    let data = {
-      username: username,
-      password: password
     };
+    let data = "mobile=" + mobile; //updated
 
-    let headers = new HttpHeaders();
-    headers.set('Content-Type', 'application/json');
-
-    return this.http.post(uri, data, { headers: headers })
-      //.catch(this.handleError);
-      .catch((err) => {
-
-        // Do messaging and error handling here
-
+    return this.http.post(uri, data, httpOptions)
+      .catch ((err) => {
         return Observable.throw(err)
+      });
+  }
+
+  getRequireOtp(phone) {
+
+  }
+
+  postLogin(mobile, pin) {
+
+    let uri = ENV.api.baseUrl + ENV.otp_api.otp2_url;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded' //updated
       })
+    };
+    let data = "phone=" + mobile+"&code=" + pin; //updated
+
+    return this.http.post(uri, data, httpOptions)
+      .catch ((err) => {
+        return Observable.throw(err)
+      });
   }
 
   postTokenValidate(token) {

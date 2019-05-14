@@ -10,8 +10,8 @@ import { ENV } from '../../env';
 */
 @Injectable()
 export class PostsProvider {
-  api_url = ENV.wp_api.baseUrl + ENV.wp_api.posts_url;
-  api_url_Zeinabian = ENV.wp_zeinabian_api.baseUrl + ENV.wp_api.posts_url;
+  api_url = ENV.api.baseUrl ;
+  api_url_Zeinabian = ENV.api.baseUrl;
 
   constructor(public http: HttpClient) {
     console.log('Hello QuotesProvider Provider');

@@ -21,7 +21,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageServiceProvider } from '../providers/language-service/language-service';
 import { LoginPage } from '../pages/login/login';
 
-import { LoginIdeaPage } from '../pages/login-idea/login';
+import { Login2Page } from '../pages/login2/login2';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -34,7 +34,7 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     FifaApp,
     AboutPage,
     LoginPage,
-    LoginIdeaPage,
+    Login2Page,
     ContactPage,
     HomePage,
     TabsPage,
@@ -63,7 +63,7 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     FifaApp,
     AboutPage,
     LoginPage,
-    LoginIdeaPage,
+    Login2Page,
     ContactPage,
     HomePage,
     TabsPage,
