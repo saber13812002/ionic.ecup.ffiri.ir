@@ -59,7 +59,7 @@ export class RestProvider {
       });
   }
 
-  postTokenValidate(email, name: string, family: string) {
+  postTokenValidate(id, email, name: string, family: string, mobile: string, national_code: string, psn_id: string) {
     let uri = ENV.api.baseUrl + ENV.service.getMe;
     console.log(uri);
 
@@ -68,12 +68,20 @@ export class RestProvider {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    let data = "email=" + email
+    let data = "id=" + id
       + "&password=$2y$10$L5T8g1Zv26zOGyK0bVN7yuc56o.VOLb4lnnP.e4QgFczd2AF.wetK";
+      if (email)
+        data += ("&email=" + email);
     if (name)
       data += ("&name=" + name);
-    if (name)
+    if (family)
       data += ("&family=" + family);
+    if (mobile)
+      data += ("&mobile=" + mobile);
+    if (national_code)
+      data += ("&national_code=" + national_code);
+    if (psn_id)
+      data += ("&psn_id=" + psn_id);
 
     return this.http.post(uri, data, httpOptions)
       .catch((err) => {

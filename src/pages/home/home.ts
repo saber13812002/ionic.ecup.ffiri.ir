@@ -20,6 +20,7 @@ export class HomePage {
 
   public token = "";
 
+  public id: string;
   public name: string;
   public family: string;
   public mobile: string;
@@ -60,7 +61,7 @@ export class HomePage {
 
   async ionViewDidLoad() {
     let wptoken = await localStorage.getItem('wpIdeaToken');
-    this.email = (wptoken ? JSON.parse(wptoken).usr.email : null);
+    this.id = (wptoken ? JSON.parse(wptoken).usr.id : null);
     this.token = (wptoken ? JSON.parse(wptoken).token : null);
 
     if (this.token)
@@ -74,7 +75,7 @@ export class HomePage {
   }
 
   async getMe() {
-    this.restProvider.postTokenValidate(this.email, null,null).subscribe(data => {
+    this.restProvider.postTokenValidate(this.id, this.email, null, null, null, null, null).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;
@@ -93,10 +94,8 @@ export class HomePage {
   }
 
   save() {
-    this.data2.name = this.name;
-    this.data2.family = this.family;
 
-    this.restProvider.postTokenValidate(this.email, this.name, this.family).subscribe(data => {
+    this.restProvider.postTokenValidate(this.id, this.email, this.name, this.family, this.mobile, this.national_code, this.psn_id).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;

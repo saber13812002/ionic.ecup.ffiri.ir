@@ -83,18 +83,6 @@ export class Login2Page {
     //this.wpIdeaToken = localStorage.getItem('wpIdeaToken');
   }
 
-  async validateToken(jwt: string) {
-    let tok = jwt ? jwt : this.wpIdeaToken.token;
-    await this.restProvider.postTokenValidate(tok,null,null).subscribe(data => {
-      console.log(data);
-
-      if (data.status == 200) {
-        this.navCtrl.setRoot(TabsPage);
-        return true;
-      }
-    });
-  }
-
   public textChanged() {
     this.step1flag = true;
     this.logintext = "ورود";

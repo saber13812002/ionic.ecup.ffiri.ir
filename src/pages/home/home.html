@@ -21,7 +21,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-input [disabled]="true" [(ngModel)]="email" (ionChange)="modified()" type="text" placeholder="ایمیل"></ion-input>
+      <ion-input [(ngModel)]="email" (ionChange)="modified()" type="text" placeholder="ایمیل"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -33,5 +33,5 @@
     </ion-item>
 
     <button [disabled]="!change" ion-button block outline (click)="save()"
-      class="login-button">دخیره</button>
+      class="login-button">ذخیره</button>
 </ion-content>

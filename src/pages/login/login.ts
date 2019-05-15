@@ -82,18 +82,6 @@ export class LoginPage {
   }
 
 
-  async validateToken(jwt: string) {
-    let tok = jwt ? jwt : this.wpIdeaToken.token;
-    await this.restProvider.postTokenValidate(tok,null,null).subscribe(data => {
-      console.log(data);
-
-      if (data.status == 200) {
-        this.navCtrl.setRoot(TabsPage);
-        return true;
-      }
-    });
-  }
-
   public textChanged() {
 
     this.logintext = "ورود";
