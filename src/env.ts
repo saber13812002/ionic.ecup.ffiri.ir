@@ -1,7 +1,7 @@
 export const ENV = {
   name: "Development",
   api: {
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'https://fifa-web-api.liara.run',
   },
   otp_api: {
     otp1_url: '/api/v1/otp1/',
