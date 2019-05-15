@@ -6,7 +6,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { FifaApp } from './app.component';
 import { Platform } from 'ionic-angular';
 
-import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { ElementRef } from '@angular/core';
@@ -78,7 +77,6 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     RestProvider,
     PostsProvider,
     InAppBrowser,
-    Geolocation,
     LanguageServiceProvider
   ]
 })

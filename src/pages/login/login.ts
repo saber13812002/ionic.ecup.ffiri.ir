@@ -33,7 +33,7 @@ export class LoginPage {
   redirectUri: string = "http://localhost:8100/";
   loginUrl = "https://masjedcloob.ir/blog/jwt.php?client_id=&redirect_uri=&response_type=id_token-token&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzamVkY2xvb2IuaXJcL2Jsb2ciLCJpYXQiOjE1NDk0NjAyMjEsIm5iZiI6MTU0OTQ2MDIyMSwiZXhwIjoxNTUwMDY1MDIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.sbGawBdMFt7jAhn3RIYyxui_er0_XsJ67YRWBtaUUyw";
 
-  wpIonicToken: any;
+  wpIdeaToken: any;
   resultCallOtp1: any;
   token: any;
   jwt: string;
@@ -69,9 +69,10 @@ export class LoginPage {
   async ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
 
-    this.wpIonicToken = JSON.parse(localStorage.getItem('wpIonicToken'));
-    if (this.wpIonicToken) { //|| this.wpIonicToken.token != ""
-      await this.validateToken(null);
+    this.wpIdeaToken = JSON.parse(localStorage.getItem('wpIdeaToken'));
+    if (this.wpIdeaToken) { //|| this.wpIdeaToken.token != ""
+      //await this.validateToken(null);
+      this.navCtrl.setRoot(TabsPage);
     }
 
     let params = new URLSearchParams(window.location.search);
@@ -82,8 +83,8 @@ export class LoginPage {
 
 
   async validateToken(jwt: string) {
-    let tok = jwt ? jwt : this.wpIonicToken.token;
-    await this.restProvider.postTokenValidate(tok).subscribe(data => {
+    let tok = jwt ? jwt : this.wpIdeaToken.token;
+    await this.restProvider.postTokenValidate(tok,null,null).subscribe(data => {
       console.log(data);
 
       if (data.status == 200) {
@@ -137,7 +138,7 @@ export class LoginPage {
   async signup(type: string) {
     let signupOrSignin = (type == 'signup' ? ENV.security.register : ENV.security.login);
 
-    let oauthUrl = ENV.security.serverUrl + signupOrSignin
+    let oauthUrl = ENV.api.baseUrl + signupOrSignin
     '?client_id=' + ENV.clientId + '&' +
       'redirect_uri=' + ENV.redirectUri + '&' +
       'response_type=id_token%20token&'

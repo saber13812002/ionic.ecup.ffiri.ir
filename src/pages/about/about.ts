@@ -22,7 +22,7 @@ export class AboutPage {
   async signup(type: string) {
     let signupOrSignin = (type == 'signup' ? ENV.security.register : ENV.security.login);
 
-    let oauthUrl = ENV.security.serverUrl + signupOrSignin
+    let oauthUrl = ENV.security.validate + signupOrSignin
     '?client_id=' + ENV.clientId + '&' +
       'redirect_uri=' + ENV.redirectUri + '&' +
       'response_type=id_token%20token&'

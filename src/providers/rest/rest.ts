@@ -7,6 +7,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Response } from '@angular/http';
 import { ENV } from '../../env';
+import { Info } from './../../models/info';
+
 
 @Injectable()
 export class RestProvider {
@@ -31,7 +33,7 @@ export class RestProvider {
     let data = "mobile=" + mobile; //updated
 
     return this.http.post(uri, data, httpOptions)
-      .catch ((err) => {
+      .catch((err) => {
         return Observable.throw(err)
       });
   }
@@ -49,21 +51,34 @@ export class RestProvider {
         'Content-Type': 'application/x-www-form-urlencoded' //updated
       })
     };
-    let data = "phone=" + mobile+"&code=" + pin; //updated
+    let data = "phone=" + mobile + "&code=" + pin; //updated
 
     return this.http.post(uri, data, httpOptions)
-      .catch ((err) => {
+      .catch((err) => {
         return Observable.throw(err)
       });
   }
 
-  postTokenValidate(token) {
-    let uri = ENV.security.serverUrl + ENV.security.jwtToken + ENV.security.validate;
+  postTokenValidate(email, name: string, family: string) {
+    let uri = ENV.api.baseUrl + ENV.service.getMe;
+    console.log(uri);
 
-    let header: Headers = new Headers();
-    header.append('Authorization', 'Bearer ' + token);
-    return this.httpp.post(uri, {}, { headers: header })
-      .catch(this.handleError);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+    let data = "email=" + email
+      + "&password=$2y$10$L5T8g1Zv26zOGyK0bVN7yuc56o.VOLb4lnnP.e4QgFczd2AF.wetK";
+    if (name)
+      data += ("&name=" + name);
+    if (name)
+      data += ("&family=" + family);
+
+    return this.http.post(uri, data, httpOptions)
+      .catch((err) => {
+        return Observable.throw(err)
+      });
   }
 
   private handleError(error: Response | any) {
@@ -72,7 +87,7 @@ export class RestProvider {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
       if (error.status == 403)
-        localStorage.setItem('wpIonicToken', null);
+        localStorage.setItem('wpIdeaToken', null);
     }
     return Observable.throw(errMsg);
   }

@@ -4,30 +4,28 @@ export const ENV = {
     baseUrl: 'http://localhost:8000',
   },
   otp_api: {
-    otp1_url : '/api/v1/otp1/',
-    otp2_url : '/api/v1/otp2/',
+    otp1_url: '/api/v1/otp1/',
+    otp2_url: '/api/v1/otp2/',
   },
-    webapp: {
-      baseUrl: "https://masjedcloob.ir",
-      //baseUrl: "https://masjedcloob.ir",
+  webapp: {
+    baseUrl: "https://masjedcloob.ir",
+    //baseUrl: "https://masjedcloob.ir",
     socialUrl: "/social",
     avatarFolder: "/upload"
   },
   service: {
-    baseUrl: "https://masjedcloob.ir"
+    baseUrl: "https://masjedcloob.ir",
+    getMe: "/api/v1/info/me"
   },
   security: {
-    serverUrl: "https://masjedcloob.ir/blog",
-    //serverUrl: "https://berimbasket.ir",
-    jwtToken: "/wp-json/jwt-auth/v1/token",
-    validate: "/validate",
+    validate: "/api/v1/closed",
     login: "/login",
     register: "/register"
   },
   googleMap: {
     apikey: "dsgasdfasdfsdf"
   },
-  clientId:"",
-  redirectUri:"",
+  clientId: "",
+  redirectUri: "",
   logError: true
 };

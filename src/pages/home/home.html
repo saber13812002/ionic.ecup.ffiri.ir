@@ -7,8 +7,31 @@
 </ion-header>
 
 <ion-content dir="rtl" class="iranyekan">
-  <hr no-margin no-padding>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+
+    <ion-item>
+      <ion-input [(ngModel)]="name" (ionChange)="modified()" type="text" placeholder="نام"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="family" (ionChange)="modified()" type="text" placeholder="نام خانوادگی"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="mobile" (ionChange)="modified()" type="text" placeholder="موبایل"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [disabled]="true" [(ngModel)]="email" (ionChange)="modified()" type="text" placeholder="ایمیل"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="national_code" (ionChange)="modified()" type="text" placeholder="کد ملی"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="psn_id" (ionChange)="modified()" type="text" placeholder="پلی استیشن آی دی"></ion-input>
+    </ion-item>
+
+    <button [disabled]="!change" ion-button block outline (click)="save()"
+      class="login-button">دخیره</button>
 </ion-content>

@@ -34,7 +34,7 @@ export class PostsProvider {
     };
     console.log(data);
 
-    let token = JSON.parse(localStorage.getItem('wpIonicToken')).token;
+    let token = JSON.parse(localStorage.getItem('wpIdeaToken')).token;
     console.log(token);
 
     let headers = new HttpHeaders({

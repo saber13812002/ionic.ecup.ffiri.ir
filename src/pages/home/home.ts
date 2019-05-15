@@ -1,8 +1,8 @@
+import { Info } from './../../models/info';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { LoadingController } from 'ionic-angular';
-import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 import { ENV } from '../../env';
 
 @IonicPage({
@@ -20,10 +20,16 @@ export class HomePage {
 
   public token = "";
 
-  options: GeolocationOptions;
-  currentPos: Geoposition;
+  public name: string;
+  public family: string;
+  public mobile: string;
+  public email: string;
+  public national_code: string;
+  public psn_id: string;
 
   data: any;
+  data2: Info = { id: '', family: '', name: '', mobile: '' };
+  change: boolean = false;
 
   errorMessage: string;
   page = 0;
@@ -41,7 +47,6 @@ export class HomePage {
     public restProvider: RestProvider,
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
-    private geolocation: Geolocation
   ) {
 
     let loader = loadingCtrl.create({ content: "در حال بارگذاری ..." });
@@ -51,20 +56,59 @@ export class HomePage {
     loader.dismiss();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async ionViewDidLoad() {
-    let wptoken= await localStorage.getItem('wpIonicToken');
+    let wptoken = await localStorage.getItem('wpIdeaToken');
+    this.email = (wptoken ? JSON.parse(wptoken).usr.email : null);
+    this.token = (wptoken ? JSON.parse(wptoken).token : null);
 
-    this.token = (wptoken?JSON.parse(wptoken).token:null);
-
-    if (this.token )
-      this.presentToast("شما لاگین هستید میتوانید کامنت بگذارید");
+    if (this.token)
+      this.presentToast("شما لاگین هستید میتوانید ادامه دهید");
     else
       this.presentToast("پین اشتباه است");
 
+    await this.getMe();
+
+
   }
 
+  async getMe() {
+    this.restProvider.postTokenValidate(this.email, null,null).subscribe(data => {
+      console.log(data);
+      if (data.data[0]) {
+        this.name = data.data[0].name;
+        this.family = data.data[0].family;
+        this.mobile = data.data[0].mobile;
+        this.email = data.data[0].email;
+        this.national_code = data.data[0].national_code;
+        this.psn_id = data.data[0].psn_id;
+      }
+      return data;
+    });
+  }
+
+  public modified() {
+    this.change = true;
+  }
+
+  save() {
+    this.data2.name = this.name;
+    this.data2.family = this.family;
+
+    this.restProvider.postTokenValidate(this.email, this.name, this.family).subscribe(data => {
+      console.log(data);
+      if (data.data[0]) {
+        this.name = data.data[0].name;
+        this.family = data.data[0].family;
+        this.mobile = data.data[0].mobile;
+        this.email = data.data[0].email;
+        this.national_code = data.data[0].national_code;
+        this.psn_id = data.data[0].psn_id;
+      }
+      return data;
+    });
+  }
 
   doInfinite(infiniteScroll) {
     this.page = this.page + 1;

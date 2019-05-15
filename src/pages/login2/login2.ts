@@ -76,15 +76,16 @@ export class Login2Page {
     let token = await this.restProvider.postLogin(this.mobile, this.pin).subscribe(data => {
       console.log(data);
       localStorage.setItem('wpIdeaToken', JSON.stringify(data));
+      this.wpIdeaToken = JSON.stringify(data);
       return data.token;
     });
 
-    this.wpIdeaToken = localStorage.getItem('wpIdeaToken');
+    //this.wpIdeaToken = localStorage.getItem('wpIdeaToken');
   }
 
   async validateToken(jwt: string) {
     let tok = jwt ? jwt : this.wpIdeaToken.token;
-    await this.restProvider.postTokenValidate(tok).subscribe(data => {
+    await this.restProvider.postTokenValidate(tok,null,null).subscribe(data => {
       console.log(data);
 
       if (data.status == 200) {
@@ -109,13 +110,6 @@ export class Login2Page {
     loading.present();
   }
 
-  async callOtp1() {
-    let token = await this.restProvider.postOtp1(this.mobile).subscribe(data => {
-      console.log(data);
-      return data;
-    });
-  }
-
 
   public async createAndSaveNonce(): Promise<string> {
 
@@ -126,7 +120,7 @@ export class Login2Page {
   async signup(type: string) {
     let signupOrSignin = (type == 'signup' ? ENV.security.register : ENV.security.login);
 
-    let oauthUrl = ENV.security.serverUrl + signupOrSignin
+    let oauthUrl = ENV.security.login + signupOrSignin
     '?client_id=' + ENV.clientId + '&' +
       'redirect_uri=' + ENV.redirectUri + '&' +
       'response_type=id_token%20token&'
@@ -160,7 +154,7 @@ export class Login2Page {
 
 
   gotoInfoPage() {
-  this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(TabsPage);
   }
 
   async signup2(): Promise<any> {
