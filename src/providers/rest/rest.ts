@@ -68,10 +68,9 @@ export class RestProvider {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    let data = "id=" + id
-      + "&password=$2y$10$L5T8g1Zv26zOGyK0bVN7yuc56o.VOLb4lnnP.e4QgFczd2AF.wetK";
-      if (email)
-        data += ("&email=" + email);
+    let data = "id=" + id;
+    if (email)
+      data += ("&email=" + email);
     if (name)
       data += ("&name=" + name);
     if (family)

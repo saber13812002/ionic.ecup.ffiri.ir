@@ -61,11 +61,6 @@ export class Login2Page {
 
     this.mobile = this.navParams.get('mobile');
 
-    this.wpIdeaToken = JSON.parse(localStorage.getItem('wpIdeaToken'));
-    if (this.wpIdeaToken) {
-      await this.validateToken(null);
-    }
-
     let params = new URLSearchParams(window.location.search);
     this.JWT = params.get('jwt');
     console.log('jwt :' + this.JWT)

@@ -61,7 +61,7 @@ export class HomePage {
 
   async ionViewDidLoad() {
     let wptoken = await localStorage.getItem('wpIdeaToken');
-    this.id = (wptoken ? JSON.parse(wptoken).usr.id : null);
+    this.id = (wptoken ? JSON.parse(wptoken).usr.id.id : null);
     this.token = (wptoken ? JSON.parse(wptoken).token : null);
 
     if (this.token)
