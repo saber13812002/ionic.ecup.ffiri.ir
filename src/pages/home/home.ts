@@ -15,12 +15,15 @@ import { ENV } from '../../env';
 })
 export class HomePage {
 
+  patternNationalCode: RegExp = /^\d{10}$/;
+
   public stories = new Array();
   public posts = new Array();
 
   public token = "";
 
   public id: string;
+  public id2: string;
   public name: string;
   public family: string;
   public mobile: string;
@@ -30,6 +33,9 @@ export class HomePage {
 
   data: any;
   data2: Info = { id: '', family: '', name: '', mobile: '' };
+
+  flagPSN: boolean = true;
+  flagNID: boolean = true;
   change: boolean = false;
 
   errorMessage: string;
@@ -60,8 +66,11 @@ export class HomePage {
   ngOnInit(): void { }
 
   async ionViewDidLoad() {
-    let wptoken = await localStorage.getItem('wpIdeaToken');
-    this.id = (wptoken ? JSON.parse(wptoken).usr.id.id : null);
+    let wptoken = await localStorage.getItem('wpIdeaTokenECUP');
+    // this.id = (wptoken ? JSON.parse(wptoken).usr.id : null);
+    // this.id2 = (wptoken ? JSON.parse(wptoken).usr.id.id : null);
+    // if (this.id2)
+    //   this.id = this.id2;
     this.token = (wptoken ? JSON.parse(wptoken).token : null);
 
     if (this.token)
@@ -69,13 +78,16 @@ export class HomePage {
     else
       this.presentToast("پین اشتباه است");
 
+
+    this.presentToast("کمی صبر کنید");
+
     await this.getMe();
 
 
   }
 
   async getMe() {
-    this.restProvider.postTokenValidate(this.id, this.email, null, null, null, null, null).subscribe(data => {
+    this.restProvider.postTokenValidate(this.token, this.email, null, null, null, null, null).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;
@@ -84,6 +96,7 @@ export class HomePage {
         this.email = data.data[0].email;
         this.national_code = data.data[0].national_code;
         this.psn_id = data.data[0].psn_id;
+        this.presentToast("بارگذاری شد");
       }
       return data;
     });
@@ -93,9 +106,31 @@ export class HomePage {
     this.change = true;
   }
 
-  save() {
+  async checkNID() {
+    this.modified();
 
-    this.restProvider.postTokenValidate(this.id, this.email, this.name, this.family, this.mobile, this.national_code, this.psn_id).subscribe(data => {
+    if (this.patternNationalCode.test(this.national_code) && this.checkCodeMeli(this.national_code)) {
+      this.flagNID = true;
+    }
+    else {
+      this.flagNID = false;
+    }
+  }
+
+  async checkPSN() {
+    this.modified();
+
+    if ((this.psn_id)) {
+      this.flagPSN = true;
+    }
+    else {
+      this.flagPSN = false;
+    }
+  }
+
+  save() {
+    this.presentToast("کمی صبر کنید");
+    this.restProvider.postTokenValidate(this.token, this.email, this.name, this.family, this.mobile, this.national_code, this.psn_id).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;
@@ -104,6 +139,7 @@ export class HomePage {
         this.email = data.data[0].email;
         this.national_code = data.data[0].national_code;
         this.psn_id = data.data[0].psn_id;
+        this.presentToast("ذخیره شد");
       }
       return data;
     });
@@ -113,7 +149,6 @@ export class HomePage {
     this.page = this.page + 1;
 
   }
-
 
   likeButton() {
     if (this.like_btn.icon_name === 'heart-outline') {
@@ -136,4 +171,28 @@ export class HomePage {
     });
     toast.present();
   }
+
+  checkCodeMeli(input) {
+    if (!/^\d{10}$/.test(input)
+      || input == '0000000000'
+      || input == '1111111111'
+      || input == '2222222222'
+      || input == '3333333333'
+      || input == '4444444444'
+      || input == '5555555555'
+      || input == '6666666666'
+      || input == '7777777777'
+      || input == '8888888888'
+      || input == '9999999999')
+      return false;
+    var check = parseInt(input[9]);
+    var sum = 0;
+    var i;
+    for (i = 0; i < 9; ++i) {
+      sum += parseInt(input[i]) * (10 - i);
+    }
+    sum %= 11;
+    return (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
+  }
+
 }

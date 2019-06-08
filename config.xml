@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1000" id="ir.masjedcloob.ionic" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>masjedcloob</name>
-    <description>masjedcloob.ir</description>
-    <author email="saber.tabatabaee@gmail.com" href="http://masjedcloob.ir">masjedcloob Team</author>
+<widget android-versionCode="1000" id="ir.ffiri.ecup" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ecup</name>
+    <description>ecub</description>
+    <author email="saber.tabatabaee@gmail.com" href="http://ecup.ffiri.ir">ffiri.ecup Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -12,7 +12,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
-    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
@@ -83,9 +83,9 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="ionic-plugin-deeplinks" spec="^1.0.17">
-        <variable name="URL_SCHEME" value="masjedcloob" />
+        <variable name="URL_SCHEME" value="ffiri" />
         <variable name="DEEPLINK_SCHEME" value="https" />
-        <variable name="DEEPLINK_HOST" value="masjedcloob.ir" />
+        <variable name="DEEPLINK_HOST" value="ecup.ffiri.ir" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
         <variable name="ANDROID_2_PATH_PREFIX" value="/" />
         <variable name="ANDROID_3_PATH_PREFIX" value="/" />

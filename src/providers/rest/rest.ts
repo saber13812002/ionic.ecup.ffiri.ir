@@ -18,16 +18,13 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
-  apiUrl = ENV.api.baseUrl;
-  apiFolder = 'api';
-
   postOtp1(mobile): Observable<any[]> {
 
     let uri = ENV.api.baseUrl + ENV.otp_api.otp1_url;
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded' //updated
+        'Content-Type': 'application/x-www-form-urlencoded',
       })
     };
     let data = "mobile=" + mobile; //updated
@@ -36,6 +33,33 @@ export class RestProvider {
       .catch((err) => {
         return Observable.throw(err)
       });
+  }
+
+  async getOtp1(mobile) {
+
+    let url =
+      ENV.api.baseUrl +
+      ENV.otp_api.otp11_url +
+      `?mobile=${mobile}`;
+
+    console.log(url);
+
+    return this.http
+      .get(
+        url,
+        {
+          headers:
+            new HttpHeaders(
+              {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'MyClientCert': '',        // This is empty
+                'MyToken': ''              // This is empty
+              }
+            )
+        }
+      )
+      .map(res => res as any[]);
   }
 
   getRequireOtp(phone) {
@@ -48,15 +72,39 @@ export class RestProvider {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded' //updated
+        'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    let data = "phone=" + mobile + "&code=" + pin; //updated
+    let data = "phone=" + mobile + "&code=" + pin;
 
     return this.http.post(uri, data, httpOptions)
       .catch((err) => {
         return Observable.throw(err)
       });
+  }
+
+  async getOtp2(mobile, pin) {
+    let url = ENV.api.baseUrl + ENV.otp_api.otp22_url +
+      `${mobile}/${pin}`;
+
+    console.log(url);
+
+    return this.http
+      .get(
+        url,
+        {
+          headers:
+            new HttpHeaders(
+              {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'MyClientCert': '',        // This is empty
+                'MyToken': ''              // This is empty
+              }
+            )
+        }
+      )
+      .map(res => res as any[]);
   }
 
   postTokenValidate(id, email, name: string, family: string, mobile: string, national_code: string, psn_id: string) {
@@ -68,7 +116,7 @@ export class RestProvider {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    let data = "id=" + id;
+    let data = "token=" + id;
     if (email)
       data += ("&email=" + email);
     if (name)
@@ -88,15 +136,24 @@ export class RestProvider {
       });
   }
 
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      if (error.status == 403)
-        localStorage.setItem('wpIdeaToken', null);
-    }
-    return Observable.throw(errMsg);
+  postTokenGetPayStatus(author_id: string, token: string) {
+    let uri = ENV.api.baseUrl + ENV.service.getMePay;
+    console.log(uri);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+    let data = "author_id=" + author_id;
+    if (token)
+      data += ("&token=" + token);
+
+
+    return this.http.post(uri, data, httpOptions)
+      .catch((err) => {
+        return Observable.throw(err)
+      });
   }
 
 }

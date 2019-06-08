@@ -31,9 +31,9 @@ export class LoginPage {
   mobile: string;
 
   redirectUri: string = "http://localhost:8100/";
-  loginUrl = "https://masjedcloob.ir/blog/jwt.php?client_id=&redirect_uri=&response_type=id_token-token&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzamVkY2xvb2IuaXJcL2Jsb2ciLCJpYXQiOjE1NDk0NjAyMjEsIm5iZiI6MTU0OTQ2MDIyMSwiZXhwIjoxNTUwMDY1MDIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.sbGawBdMFt7jAhn3RIYyxui_er0_XsJ67YRWBtaUUyw";
+  loginUrl = "https://ffiri.ir/blog/jwt.php?client_id=&redirect_uri=&response_type=id_token-token&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbWFzamVkY2xvb2IuaXJcL2Jsb2ciLCJpYXQiOjE1NDk0NjAyMjEsIm5iZiI6MTU0OTQ2MDIyMSwiZXhwIjoxNTUwMDY1MDIxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.sbGawBdMFt7jAhn3RIYyxui_er0_XsJ67YRWBtaUUyw";
 
-  wpIdeaToken: any;
+  wpIdeaTokenECUP: any;
   resultCallOtp1: any;
   token: any;
   jwt: string;
@@ -69,8 +69,8 @@ export class LoginPage {
   async ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
 
-    this.wpIdeaToken = JSON.parse(localStorage.getItem('wpIdeaToken'));
-    if (this.wpIdeaToken) { //|| this.wpIdeaToken.token != ""
+    this.wpIdeaTokenECUP = JSON.parse(localStorage.getItem('wpIdeaTokenECUP'));
+    if (this.wpIdeaTokenECUP) { //|| this.wpIdeaTokenECUP.token != ""
       //await this.validateToken(null);
       this.navCtrl.setRoot(TabsPage);
     }
@@ -81,6 +81,32 @@ export class LoginPage {
 
   }
 
+  private async callOtp11() {
+    let loading = this.loadingCtrl.create({ content: 'در حال ارسال درخواست به سرور' });
+    await loading.present();
+
+    var report = await this.restProvider.getOtp1(
+      this.mobile
+    );
+
+    report.subscribe(
+      res => {
+        console.log(res);
+        this.resultCallOtp1 = res;
+        this.step1flag = false;
+      },
+      err => {
+        this.presentToast(
+          'سرور در دسترس نیست!'
+          // display: 'top',
+          // color: 'warning'
+        );
+        console.log(err);
+        loading.dismiss();
+      },
+      () => loading.dismiss()
+    );
+  }
 
   public textChanged() {
 
@@ -99,6 +125,15 @@ export class LoginPage {
 
   public gotoPinPage() {
     this.navCtrl.setRoot(Login2Page, { mobile: this.mobile });
+  }
+
+  async login2() {
+    let loader = this.loadingCtrl.create({ content: 'ارسال' });
+    await loader.present();
+
+    await this.callOtp11();
+
+    loader.dismiss();
   }
 
   async callOtp1() {
@@ -133,9 +168,9 @@ export class LoginPage {
       ;
 
     if (type == 'add')
-      oauthUrl = 'https://masjedcloob.ir/blog/wp-admin/post-new.php';
+      oauthUrl = 'https://ffiri.ir/blog/wp-admin/post-new.php';
     else if (type == 'all')
-      oauthUrl = 'https://masjedcloob.ir/blog/wp-admin/edit.php';
+      oauthUrl = 'https://ffiri.ir/blog/wp-admin/edit.php';
 
     const browser = this.iab.create(oauthUrl, '_blank', 'location=no,clearcache=yes,clearsessioncache=yes,useWideViewPort=yes');
 

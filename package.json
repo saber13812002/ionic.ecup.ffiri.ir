@@ -1,8 +1,8 @@
 {
-  "name": "masjedcloob",
+  "name": "ecup",
   "version": "1.1.2",
   "author": "saber tabatabaee yazdi",
-  "homepage": "https://masjedcloob.ir/",
+  "homepage": "https://ecup.ffiri.ir/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -52,7 +52,7 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "2.4.2"
   },
-  "description": "masjedcloob is an app for masjed pray for GOD",
+  "description": "ecup",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -63,9 +63,9 @@
       "cordova-plugin-inappbrowser": {},
       "pushe-cordova-plugin": {},
       "ionic-plugin-deeplinks": {
-        "URL_SCHEME": "masjedcloob",
+        "URL_SCHEME": "ffiri",
         "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "masjedcloob.ir",
+        "DEEPLINK_HOST": "ffiri.ir",
         "ANDROID_PATH_PREFIX": "/",
         "ANDROID_2_PATH_PREFIX": "/",
         "ANDROID_3_PATH_PREFIX": "/",

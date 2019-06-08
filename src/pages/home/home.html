@@ -17,7 +17,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-input [(ngModel)]="mobile" (ionChange)="modified()" type="text" placeholder="موبایل"></ion-input>
+      <ion-input [disabled]="true" [(ngModel)]="mobile" (ionChange)="modified()" type="text" placeholder="موبایل"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -25,11 +25,19 @@
     </ion-item>
 
     <ion-item>
-      <ion-input [(ngModel)]="national_code" (ionChange)="modified()" type="text" placeholder="کد ملی"></ion-input>
+      <ion-input [(ngModel)]="national_code" (ionChange)="checkNID()" type="text" placeholder="کد ملی"></ion-input>
+    </ion-item>
+
+    <ion-item class="danger" *ngIf="!flagNID">
+      لطفا عدد کدملی خود را کامل و صحیح وارد کنید
     </ion-item>
 
     <ion-item>
-      <ion-input [(ngModel)]="psn_id" (ionChange)="modified()" type="text" placeholder="پلی استیشن آی دی"></ion-input>
+      <ion-input [(ngModel)]="psn_id" (ionChange)="checkPSN()" type="text" placeholder="پلی استیشن آی دی"></ion-input>
+    </ion-item>
+
+    <ion-item class="danger" *ngIf="!flagPSN">
+      لطفا آی دی را وارد کنید
     </ion-item>
 
     <button [disabled]="!change" ion-button block outline (click)="save()"

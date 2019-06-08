@@ -13,10 +13,10 @@
       <ion-input [(ngModel)]="pin" (ionChange)="textChanged()" type="number" placeholder="پین"></ion-input>
     </ion-item>
 
-    <button [disabled]="!step1flag" ion-button block outline (click)="login()" color="light"
+    <button [disabled]="!step1flag" ion-button block outline (click)="login2()" color="light"
       class="login-button">بررسی</button>
 
-    <button [disabled]="!wpIdeaToken" ion-button block outline (click)="gotoInfoPage()" color="light" class="login-button">صفحه ی بعد</button>
+    <button [disabled]="!wpIdeaTokenECUP" ion-button block outline (click)="gotoInfoPage()" color="light" class="login-button">صفحه ی بعد</button>
 
   </div>
 </ion-content>

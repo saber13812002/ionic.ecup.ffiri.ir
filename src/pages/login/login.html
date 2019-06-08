@@ -12,7 +12,7 @@
       <ion-input [(ngModel)]="mobile" (ionChange)="step1()" [pattern]="patternMobile" type="text" placeholder="موبایل">
       </ion-input>
     </ion-item>
-    <button [disabled]="!step1flag" ion-button block outline (click)="login()" color="light" class="login-button">{{logintext}}</button>
+    <button [disabled]="!step1flag" ion-button block outline (click)="login2()" color="light" class="login-button">{{logintext}}</button>
     <button [disabled]="!resultCallOtp1" ion-button block outline (click)="gotoPinPage()" color="light" class="login-button">صفحه ی بعد</button>
   </div>
 </ion-content>

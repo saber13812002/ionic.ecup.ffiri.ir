@@ -11,4 +11,21 @@
   <button ion-button block clear (click)="signup('signup')" color="dark" class="login-button">
     <ion-icon name="logo-eeta"></ion-icon> پرداخت بانکی
   </button>
+
+  <ion-item *ngIf="status == 'Payed'">
+  پرداخت شما قبلا انجام شده است
+<br>
+  شماره کارت
+  {{cardNumber}}
+  <br>
+  شماره مرجع
+  {{refId}}
+  <br>
+  شماره پیگیری
+  {{trackingCode}}
+  <br>
+  شماره تراکنش
+  {{transId}}
+
+  </ion-item>
 </ion-content>
