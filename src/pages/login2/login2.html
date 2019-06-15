@@ -1,9 +1,19 @@
-<ion-content padding class="transparent-header">
+<ion-content padding class="transparent-header iranyekan">
   <ion-header>
     <ion-navbar>
+      <nav class="navigation iranyekan" role="navigation">
+          <ul class="primary-nav">
+              <li><a href="/reg">ثبت نام</a></li>
+              <li><a href="#download">قوانین</a></li>
+              <li><a href="#testimonials">جدول مسابقات</a></li>
+              <li><a href="#teams">آمار بازی</a></li>
+              <li><a href="#works" class="">گالری</a></li>
+              <li><a href="#features" class="">اخبار</a></li>
+          </ul>
+      </nav>
     </ion-navbar>
   </ion-header>
-  <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports.svg" />
+  <img class="logo" src="http://ecupservice.ffiri.ir/images/logo.png" />
   <div padding *ngIf="!jwt">
 
     <button [disabled]="!step1flag" ion-button block outline (click)="goToFirstPage()" color="light"
@@ -21,7 +31,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-toolbar class="footer">
+  <ion-toolbar class="footer navigation iranyekan white">
     <ion-list no-lines>
     سایت فوتبال مجازی ایران
     </ion-list>

@@ -1,13 +1,21 @@
-<ion-content padding class="transparent-header">
+<ion-content padding class="transparent-header iranyekan white">
   <ion-header>
     <ion-navbar>
+      <nav class="navigation iranyekan" role="navigation">
+          <ul class="primary-nav">
+              <li><a href="/reg">ثبت نام</a></li>
+              <li><a href="#download">قوانین</a></li>
+              <li><a href="#testimonials">جدول مسابقات</a></li>
+              <li><a href="#teams">آمار بازی</a></li>
+              <li><a href="#works" class="">گالری</a></li>
+              <li><a href="#features" class="">اخبار</a></li>
+          </ul>
+      </nav>
     </ion-navbar>
   </ion-header>
-  <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/e/ea/EA_Sports.svg" />
+  <img class="logo" src="http://ecupservice.ffiri.ir/images/logo.png" />
   <div padding *ngIf="!jwt">
-      <ion-item>
         لطفا شماره همراه خود را وارد کنید
-      </ion-item>
     <ion-item>
       <ion-input [(ngModel)]="mobile" (ionChange)="step1()" [pattern]="patternMobile" type="text" placeholder="موبایل">
       </ion-input>
@@ -16,8 +24,8 @@
     <button [disabled]="!resultCallOtp1" ion-button block outline (click)="gotoPinPage()" color="light" class="login-button">صفحه ی بعد</button>
   </div>
 </ion-content>
-<ion-footer>
-    <ion-list no-lines>
+<ion-footer class="navigation iranyekan white">
+    <ion-list>
     سایت فوتبال مجازی ایران
     </ion-list>
 </ion-footer>
