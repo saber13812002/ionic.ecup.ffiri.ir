@@ -19,8 +19,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageServiceProvider } from '../providers/language-service/language-service';
 import { LoginPage } from '../pages/login/login';
-
 import { Login2Page } from '../pages/login2/login2';
+import { ExitPage } from '../pages/exit/exit';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -37,6 +37,7 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     ContactPage,
     HomePage,
     TabsPage,
+    ExitPage
     //HttpClientModule,
     //JsonpModule // if used
   ],
@@ -66,6 +67,7 @@ import { PostsProvider } from '../providers/wp-rest/posts'
     ContactPage,
     HomePage,
     TabsPage,
+    ExitPage
     //HttpClientModule,
     //JsonpModule // if used
   ],
