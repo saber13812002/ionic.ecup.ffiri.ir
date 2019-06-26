@@ -107,7 +107,7 @@ export class RestProvider {
       .map(res => res as any[]);
   }
 
-  postTokenValidate(id, email, name: string, family: string, mobile: string, national_code: string, psn_id: string) {
+  postTokenValidate(id, email, name: string, family: string, mobile: string, national_code: string, psn_id: string, type: string) {
     let uri = ENV.api.baseUrl + ENV.service.getMe;
     console.log(uri);
 
@@ -129,6 +129,8 @@ export class RestProvider {
       data += ("&national_code=" + national_code);
     if (psn_id)
       data += ("&psn_id=" + psn_id);
+    if (type)
+      data += ("&type=" + type);
 
     return this.http.post(uri, data, httpOptions)
       .catch((err) => {

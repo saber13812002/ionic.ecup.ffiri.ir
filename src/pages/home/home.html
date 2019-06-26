@@ -50,6 +50,15 @@
       لطفا آی دی را وارد کنید
     </ion-item>
 
+
+    <ion-item>
+      <ion-label>قصد شرکت در کدام مسابقه را دارید؟</ion-label>
+      <ion-select (ionChange)="modified()" [(ngModel)]="type" value="onlinefriendlies" okText="ثبت" cancelText="انصراف">
+        <ion-option value="Online Friendlies">Online Friendlies</ion-option>
+        <ion-option value="FUT">FUT</ion-option>
+      </ion-select>
+    </ion-item>
+
     <button [disabled]="!change" ion-button block outline (click)="save()"
       class="login-button white">ذخیره</button>
 </ion-content>

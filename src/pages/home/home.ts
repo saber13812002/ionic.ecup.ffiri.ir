@@ -30,6 +30,7 @@ export class HomePage {
   public email: string;
   public national_code: string;
   public psn_id: string;
+  public type: string;
 
   data: any;
   data2: Info = { id: '', family: '', name: '', mobile: '' };
@@ -87,7 +88,7 @@ export class HomePage {
   }
 
   async getMe() {
-    this.restProvider.postTokenValidate(this.token, this.email, null, null, null, null, null).subscribe(data => {
+    this.restProvider.postTokenValidate(this.token, this.email, null, null, null, null, null, null).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;
@@ -96,6 +97,7 @@ export class HomePage {
         this.email = data.data[0].email;
         this.national_code = data.data[0].national_code;
         this.psn_id = data.data[0].psn_id;
+        this.type = data.data[0].type;
         this.presentToast("بارگذاری شد");
       }
       return data;
@@ -130,7 +132,7 @@ export class HomePage {
 
   save() {
     this.presentToast("کمی صبر کنید");
-    this.restProvider.postTokenValidate(this.token, this.email, this.name, this.family, this.mobile, this.national_code, this.psn_id).subscribe(data => {
+    this.restProvider.postTokenValidate(this.token, this.email, this.name, this.family, this.mobile, this.national_code, this.psn_id, this.type).subscribe(data => {
       console.log(data);
       if (data.data[0]) {
         this.name = data.data[0].name;
@@ -139,6 +141,7 @@ export class HomePage {
         this.email = data.data[0].email;
         this.national_code = data.data[0].national_code;
         this.psn_id = data.data[0].psn_id;
+        this.type = data.data[0].type;
         this.presentToast("ذخیره شد");
       }
       return data;
