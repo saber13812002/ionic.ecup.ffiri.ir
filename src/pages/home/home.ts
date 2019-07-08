@@ -170,7 +170,7 @@ export class HomePage {
     const toast = this.toastController.create({
       message: msg,
       duration: time,
-      position: "top"
+      position: "bottom"
     });
     toast.present();
   }

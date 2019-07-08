@@ -25,9 +25,30 @@ export class RestProvider {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
       })
     };
     let data = "mobile=" + mobile; //updated
+
+    return this.http.post(uri, data, httpOptions)
+      .catch((err) => {
+        return Observable.throw(err)
+      });
+  }
+
+
+  postOtp2(mobile, pin): Observable<any[]> {
+
+    let uri = ENV.api.baseUrl + ENV.otp_api.otp2_url;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
+      })
+
+    };
+    let data = "mobile=" + mobile + "&code=" + pin; //updated
 
     return this.http.post(uri, data, httpOptions)
       .catch((err) => {

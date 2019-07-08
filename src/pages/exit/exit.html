@@ -1,15 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      خروج
+      منو
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  خروج
+  منو
   <button ion-button block clear (click)="exit()" color="dark" class="login-button">
-    <ion-icon name="log-out"></ion-icon> خروج
+    <ion-icon name="log-out"> </ion-icon> خروج
+  </button>
+  <button ion-button block clear (click)="exit('payment')" color="dark" class="login-button">
+    <ion-icon name="card"> </ion-icon> پرداخت
+  </button>
+  <button ion-button block clear (click)="exit('profile')" color="dark" class="login-button">
+    <ion-icon name="contact"> </ion-icon> پروفایل
   </button>
 
 </ion-content>

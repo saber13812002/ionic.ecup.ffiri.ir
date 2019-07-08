@@ -85,6 +85,7 @@ export class LoginPage {
     let loading = this.loadingCtrl.create({ content: 'در حال ارسال درخواست به سرور' });
     await loading.present();
 
+    // var report = await this.restProvider.postOtp1(
     var report = await this.restProvider.getOtp1(
       this.mobile
     );
@@ -94,6 +95,12 @@ export class LoginPage {
         console.log(res);
         this.resultCallOtp1 = res;
         this.step1flag = false;
+        this.presentToast(
+          'انجام شد!'
+          // display: 'top',
+          // color: 'warning'
+        );
+        this.gotoPinPage();
       },
       err => {
         this.presentToast(

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser';
 import { LoginPage } from '../login/login';
+import { AboutPage } from '../about/about';
+import { HomePage } from './../home/home';
 
 @IonicPage({
   name: 'ExitPage'
@@ -26,10 +28,18 @@ export class ExitPage {
     this.presentToast("کمی صبر کنید");
   }
 
-  async exit() {
-      console.log('log-out');
+  async exit(type?: string) {
+    console.log('setting buttion');
+    if (type == 'profile') {
+      this.navCtrl.push(HomePage)
+    }
+    else if (type == 'payment') {
+      this.navCtrl.push(AboutPage)
+    }
+    else {
       localStorage.removeItem('wpIdeaTokenECUP');
       this.navCtrl.push(LoginPage)
+    }
 
   }
 

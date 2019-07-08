@@ -107,6 +107,7 @@ export class Login2Page {
     let loading = this.loadingCtrl.create({ content: 'در حال ارسال درخواست به سرور' });
     await loading.present();
 
+    // var report = await this.restProvider.postOtp2(
     var report = await this.restProvider.getOtp2(
       this.mobile, this.pin
     );
@@ -117,6 +118,12 @@ export class Login2Page {
         localStorage.setItem('wpIdeaTokenECUP', JSON.stringify(res));
         this.wpIdeaTokenECUP = JSON.stringify(res);
         this.step1flag = false;
+        this.presentToast(
+          'انجام شد'
+          // display: 'top',
+          // color: 'warning'
+        );
+        this.gotoInfoPage();
       },
       err => {
         this.presentToast(
