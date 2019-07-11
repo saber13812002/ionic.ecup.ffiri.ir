@@ -16,6 +16,11 @@ import { ENV } from '../../env';
 export class HomePage {
 
   patternNationalCode: RegExp = /^\d{10}$/;
+  patternFarsi: RegExp = /[^a-zA-Z]+$/;
+  patternEnglish: RegExp = /^[a-zA-Z]+$/;
+  patternUsername: RegExp = /^[a-zA-Z0-9$@$!%*?&#^-_. +]+$/;
+  patternEmail: RegExp = /^[a-zA-Z0-9$@$!%*?&#^-_. +]+$/;
+  patternMobile: RegExp = /^(0)?9\d{9}$/;
 
   public stories = new Array();
   public posts = new Array();
@@ -35,8 +40,14 @@ export class HomePage {
   data: any;
   data2: Info = { id: '', family: '', name: '', mobile: '' };
 
-  flagPSN: boolean = true;
+  flagPSN: boolean = false;
   flagNID: boolean = true;
+  flagName: boolean = false;
+  flagFamily: boolean = false;
+  flagEmail: boolean = false;
+
+
+
   change: boolean = false;
 
   errorMessage: string;
@@ -106,6 +117,27 @@ export class HomePage {
 
   public modified() {
     this.change = true;
+
+    if (this.patternFarsi.test(this.name)) {
+      this.flagName = false;
+    }
+    else {
+      this.flagName = true;
+    }
+
+    if (this.patternFarsi.test(this.family)) {
+      this.flagFamily = false;
+    }
+    else {
+      this.flagFamily = true;
+    }
+
+    if (this.patternEmail.test(this.email)) {
+      this.flagEmail = false;
+    }
+    else {
+      this.flagEmail = true;
+    }
   }
 
   async checkNID() {
@@ -122,11 +154,11 @@ export class HomePage {
   async checkPSN() {
     this.modified();
 
-    if ((this.psn_id)) {
-      this.flagPSN = true;
+    if (this.patternEmail.test(this.psn_id)) {
+      this.flagPSN = false;
     }
     else {
-      this.flagPSN = false;
+      this.flagPSN = true;
     }
   }
 

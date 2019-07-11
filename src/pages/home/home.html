@@ -13,8 +13,16 @@
       <ion-input [(ngModel)]="name" (ionChange)="modified()" type="text" placeholder="نام"></ion-input>
     </ion-item>
 
+    <ion-item class="danger" *ngIf="flagName">
+      لطفا نام خود را فارسی وارد کنید
+    </ion-item>
+
     <ion-item>
       <ion-input [(ngModel)]="family" (ionChange)="modified()" type="text" placeholder="نام خانوادگی"></ion-input>
+    </ion-item>
+
+    <ion-item class="danger" *ngIf="flagFamily">
+      لطفا نام خانوادگی را فارسی وارد کنید
     </ion-item>
 
     <ion-item>
@@ -25,19 +33,23 @@
       <ion-input [(ngModel)]="email" (ionChange)="modified()" type="text" placeholder="ایمیل"></ion-input>
     </ion-item>
 
+    <ion-item class="danger" *ngIf="flagEmail">
+      لطفا ایمیل خود را با حروف انگلیسی و به صورت کامل و صحیح وارد کنید
+    </ion-item>
+
     <ion-item>
       <ion-input [(ngModel)]="national_code" (ionChange)="checkNID()" type="text" placeholder="کد ملی"></ion-input>
     </ion-item>
 
     <ion-item class="danger" *ngIf="!flagNID">
-      لطفا عدد کدملی خود را کامل و صحیح وارد کنید
+      لطفا عدد کدملی خود را کامل و صحیح ده رقمی وارد کنید
     </ion-item>
 
     <ion-item>
-      <ion-input [(ngModel)]="psn_id" (ionChange)="checkPSN()" type="text" placeholder="پلی استیشن آی دی"></ion-input>
+      <ion-input [(ngModel)]="psn_id" (ionChange)="checkPSN()" type="text" placeholder="گیم آی دی پلی استیشن و "></ion-input>
     </ion-item>
 
-    <ion-item class="danger" *ngIf="!flagPSN">
+    <ion-item class="danger" *ngIf="flagPSN">
       لطفا آی دی را وارد کنید
     </ion-item>
 
